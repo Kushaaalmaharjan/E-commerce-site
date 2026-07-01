@@ -5,16 +5,16 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-const registerUser = async (req, res)  => {
+const registerUser = async (req, res, next)  => {
     try{
         const {name, email, password} = req.body;
-        const userExists = await User.FindOne({ email});
+        const userExists = await User.findOne({ email});
         if(userExists){
-            req.status(400);
+            res.status(400);
             throw new Error('User Already Exists');
         }
 
-        const User = await User.create({ name,email,password});
+        const user = await User.create({ name,email,password});
         res.status(200).json({
             _id: user._id,
             name: user.name,
@@ -27,13 +27,13 @@ const registerUser = async (req, res)  => {
     }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
     try{
         const {email, password} = req.body;
 
-        const user = await User.FindOne({email});
+        const user = await User.findOne({email});
 
-        if(user && (await user.matchpasswords(passwors))){
+        if(user && (await user.matchpasswords(password))){
             res.json({
                 _id: user._id,
                 name: user.name,

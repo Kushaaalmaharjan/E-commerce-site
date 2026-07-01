@@ -13,11 +13,11 @@ userSchema.pre('save', async function(next){
         return next;
     }
     this.password = await bycrypt.hash(this.password, 10);
-    next();
+    next;
 });
 
 userSchema.methods.matchpasswords = async function(enteredPassword){
-    return await bycrupt.compare(enteredpassword, this.password);
+    return await bycrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = mongoose.model('User', userSchema);
