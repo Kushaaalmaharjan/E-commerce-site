@@ -10,7 +10,7 @@ const protect = async ( req, res, next) => {
 
             const decode = jwt.verify(token, process.env.JWT_SECRET);
             req.user = await User.findById(decode.id).select('-password');
-            next;
+            next();
         } else{
             res.status(401);
             throw new Error('Not Authorizes, No Token');
@@ -25,7 +25,7 @@ const admin = (req, res, next) => {
         next;
     }else{
         res.status(401);
-        throw new error('Not Authorized, Not An Admin');
+        throw new Error('Not Authorized, Not An Admin');
     }
 };
 

@@ -8,14 +8,14 @@ const orderSchema = new mongoose.Schema({
         price: {type: Number, required: true},
         product : {type: mongoose.Schema.Types.ObjectId, ref : 'Product', required: true}
     }],
-    shippingAddress : {
+    shippingAddress : [{
         address : {type: String, required: true},   
-        city : {type: string, required: true},
-    },
+        city : {type: String, required: true},
+    }],
     totalPrice: {type: Number, required: true, default: 0.0},
-    isPaid: {type: boolean, default: false},
+    isPaid: {type: Boolean, default: false},
     paidAt: {type: Date},
-    isDelivered: {type: boolean, default: false},
+    isDelivered: {type: Boolean, default: false},
     deliveredAt: {type: Date},
 }, {timestamps: true});
 
