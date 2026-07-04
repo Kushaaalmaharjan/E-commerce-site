@@ -41,7 +41,7 @@ function HomePage(){
         <style>{
             `
             .carousel-item{
-                height: 800px;
+                height: 600px;
             }
             .carousel-item img {
                 height: 100%;
