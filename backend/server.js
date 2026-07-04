@@ -5,8 +5,10 @@ const productRoutes = require('./routes/productRoutes')
 const authRoutes= require('./routes/authRoutes')
 const orderRoutes = require('./routes/orderRoutes')
 const { notFound, errorHandler} = require('./middleware/errorMiddleware')
+const cors = require('cors')
 
 const app = express();
+app.use(cors());
 connectdb();
 
 app.use(express.json())
