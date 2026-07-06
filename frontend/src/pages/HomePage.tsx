@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import green from '../assets/Green.webp'
 import red from '../assets/red.png'
 import { useState, useEffect } from 'react'
@@ -63,17 +64,18 @@ function HomePage(){
 </div>
 
 <section className="product-cards row m-5  d-flex justify-content-around">
-  {products.map(product =>(
-          <div className="card" style={{ width: '18rem' }} key={product._id}>
-            <img className="card-img-top p-2" src={product.image} alt={product.name}></img>
-            <div className="card-body">
-            <h2 className="card-title">{product.name}</h2>
-            <p className="card-text">{product.description}</p>
-            <p><strong>${product.price}</strong></p>
-            <a href="#" className="btn btn-primary">Add to cart</a>
-            </div>
-          </div>
-          ))}
+ {products.map(product => (
+  <Link to={`/products/${product._id}`} key={product._id} style={{ textDecoration: 'none' }}>
+    <div className="card" style={{ width: '18rem' }}>
+      <img className="card-img-top p-2" src={product.image} alt={product.name} />
+      <div className="card-body">
+        <h2 className="card-title">{product.name}</h2>
+        <p className="card-text">{product.description}</p>
+        <p><strong>${product.price}</strong></p>
+      </div>
+    </div>
+  </Link>
+))}
 </section>
         </>
     )
